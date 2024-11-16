@@ -18,12 +18,12 @@ class Options {
         return opts;
     }
 
-    private CompilerMode mode;
-    private Platform platform = new X86Linux();
-    private String outputFileName;
-    private boolean verbose = false;
-    private LibraryLoader loader = new LibraryLoader();
-    private boolean debugParser = false;
+    private CompilerMode mode; // 提示 build 处理在何处停止
+    private Platform platform = new X86Linux(); // 平台
+    private String outputFileName; // 输出文件名
+    private boolean verbose = false; // 是否输出详细信息
+    private LibraryLoader loader = new LibraryLoader(); // 管理 import 文件的对象
+    private boolean debugParser = false; // 是否输出解析器的 debug 信息
     private CodeGeneratorOptions genOptions = new CodeGeneratorOptions();
     private AssemblerOptions asOptions = new AssemblerOptions();
     private LinkerOptions ldOptions = new LinkerOptions();

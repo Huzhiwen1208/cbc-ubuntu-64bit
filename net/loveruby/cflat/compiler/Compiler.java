@@ -107,16 +107,21 @@ public class Compiler {
 
     public void compile(String srcPath, String destPath,
                         Options opts) throws CompileException {
+        // 根据源文件生成 抽象语法树
         AST ast = parseFile(srcPath, opts);
         if (dumpAST(ast, opts.mode())) return;
         TypeTable types = opts.typeTable();
+        // 语义分析
         AST sem = semanticAnalyze(ast, types, opts);
         if (dumpSemant(sem, opts.mode())) return;
+        // 生成中间代码
         IR ir = new IRGenerator(types, errorHandler).generate(sem);
         if (dumpIR(ir, opts.mode())) return;
+        // 生成汇编代码
         AssemblyCode asm = generateAssembly(ir, opts);
         if (dumpAsm(asm, opts.mode())) return;
         if (printAsm(asm, opts.mode())) return;
+        // 将汇编代码写入指定文件
         writeFile(destPath, asm.toSource());
     }
 
