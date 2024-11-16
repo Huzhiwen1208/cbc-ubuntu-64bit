@@ -17,7 +17,7 @@ class Adder {
         }
     }
 
-    static public int evaluate(String expression) throws ParseException {
+    static public long evaluate(String expression) throws ParseException {
         Reader reader = new StringReader(expression);
         return new Adder(reader).expr();
     }
